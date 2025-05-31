@@ -62,6 +62,7 @@
         <div class="flex items-center mt-1 px-1">
           <img
             v-lazy
+            v-if="pexelData.avatar"
             class="h-3 w-3 rounded-full"
             :src="pexelData.avatar"
             alt=""

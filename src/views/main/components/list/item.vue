@@ -54,7 +54,7 @@
     </div>
     <!-- 标题 -->
     <p class="text-sm mt-1 font-bold text-zinc-900 dark:text-zinc-300 px-1">
-      {{ data.title }}
+      图片数据来自用户分享
     </p>
     <!-- 作者 -->
     <div class="flex items-center mt-1 px-1">

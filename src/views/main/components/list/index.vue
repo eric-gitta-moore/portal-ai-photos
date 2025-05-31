@@ -45,7 +45,7 @@ const loading = ref(false)
 // 数据是否全部加载完成
 const isFinished = ref(false)
 
-let query = { page: 2, size: 20 }
+let query = { page: 0, size: 20 }
 /**
  * 通过重置quer有，重新发起请求
  */
@@ -69,7 +69,7 @@ watch(
   (val) => {
     // 重置请求参数
     resetQuery({
-      page: 2,
+      page: 0,
       searchText: val
     })
   }
@@ -81,8 +81,14 @@ const getPexelsData = async () => {
   // 让 page 自增
   query.page++
   let res = await getPexelsList(query)
-  pexelsList.value.push(...res.list)
-
+  pexelsList.value.push(
+    ...res.map((e) => ({
+      ...e,
+      photo: `/api/assets/${e.id}/thumbnail`,
+      photoWidth: e.exifInfo.exifImageWidth,
+      photoHeight: e.exifInfo.exifImageHeight
+    }))
+  )
   // 判断是否全部加载完成
   if (pexelsList.value.length === res.total) {
     isFinished.value = true
